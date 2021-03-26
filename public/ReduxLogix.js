@@ -9,20 +9,7 @@ export const MakeClaim = (name, howMuch ) => {
         howMuch: howMuch
     } 
 };
-};
-    //action 'Create'
-export const CreatePolicy = (name) => {import { createStore, combineReducers } from 'redux';
-//ActionCreators
-    //action 'Add'
-export const MakeClaim = (name, howMuch ) => {
-    return {
-    type: 'MAKE_CLAIM', 
-    payload: {
-        name: name,
-        howMuch: howMuch
-    } 
-};
-};
+
     //action 'Create'
 export const CreatePolicy = (name) => {
     return {
