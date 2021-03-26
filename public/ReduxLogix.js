@@ -9,6 +9,7 @@ export const MakeClaim = (name, howMuch ) => {
         howMuch: howMuch
     } 
 };
+};
 
     //action 'Create'
 export const CreatePolicy = (name) => {
