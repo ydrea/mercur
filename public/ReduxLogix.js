@@ -20,7 +20,7 @@ export const CreatePolicy = (name) => {
         amount: 5
     }
 };
-};  
+
     //action 'Remove'
 export const RemovePolicy = (name ) => {
     return {
