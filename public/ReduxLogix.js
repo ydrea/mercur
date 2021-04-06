@@ -1,9 +1,20 @@
 import { createStore, combineReducers } from "redux";
 //ActionCreators
+
+//action 'Select'
+export const selectPolicy = (name) => {
+  return {
+    type: "SELECTED",
+    payload: {
+      name: name,
+    },
+  };
+};
+
 //action 'Add'
 export const MakeClaim = (name, howMuch) => {
   return {
-    type: "MAKE_CLAIM",
+    type: "CLAIM",
     payload: {
       name: name,
       howMuch: howMuch,
@@ -14,7 +25,7 @@ export const MakeClaim = (name, howMuch) => {
 //action 'Create'
 export const CreatePolicy = (name) => {
   return {
-    type: "CREATE_POLICY",
+    type: "+POLICY",
     payload: {
       name: name,
       amount: 5,
@@ -24,7 +35,7 @@ export const CreatePolicy = (name) => {
 //action 'Remove'
 export const RemovePolicy = (name) => {
   return {
-    type: "REMOVE_POLICY",
+    type: "-POLICY",
     payload: {
       name: name,
     },
@@ -32,9 +43,17 @@ export const RemovePolicy = (name) => {
 };
 
 //Reducers
+//reducer 'PICK A POLICY'
+export const PickaPolicy = (pickedPolicy = [], action) => {
+  if (action.type === "SELECTED") {
+    return action.payload;
+  }
+  return pickedPolicy;
+};
+
 //reducer 'ADD TO STATE'
 export const ClaimsHistory = (oldState = [], action) => {
-  if (action.type === "MAKE_CLAIM") {
+  if (action.type === "CLAIM") {
     return [...oldState, action.payload];
   }
   return oldState;
@@ -42,9 +61,9 @@ export const ClaimsHistory = (oldState = [], action) => {
 
 //reducer 'CALCULATE'
 export const AccOunting = (bagOfCash = 105, action) => {
-  if (action.type === "MAKE_CLAIM") {
+  if (action.type === "CLAIM") {
     return bagOfCash - action.payload.howMuch;
-  } else if (action.type === "CREATE_POLICY") {
+  } else if (action.type === "+POLICY") {
     return bagOfCash + action.payload.amount;
   }
   return bagOfCash;
@@ -52,9 +71,9 @@ export const AccOunting = (bagOfCash = 105, action) => {
 
 //reducer 'CREATE/REMOVE USERS'
 export const PoliCies = (listOfPolicies = [], action) => {
-  if (action.type === "CREATE_POLICY") {
+  if (action.type === "+POLICY") {
     return [...listOfPolicies, action.payload.name];
-  } else if (action.type === "REMOVE_POLICY") {
+  } else if (action.type === "-POLICY") {
     return listOfPolicies.filter((policy) => policy != action.payload.name);
   }
   return listOfPolicies;
@@ -62,9 +81,9 @@ export const PoliCies = (listOfPolicies = [], action) => {
 
 // Setup
 export const SetUp = combineReducers({
-  ClaimsHistory: ClaimsHistory,
-  AccOunting: AccOunting,
-  PoliCies: PoliCies,
+  Claimshistory: ClaimsHistory,
+  Accounting: AccOunting,
+  Policies: PoliCies,
 });
 
 //Store
